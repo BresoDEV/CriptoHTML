@@ -1,1 +1,1 @@
-http://bresodev.myartsonline.com/CriptoHTML/
+ https://bresodev.github.io/CriptoHTML/

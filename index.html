@@ -8,63 +8,102 @@
     <title>Document</title>
 </head>
 <style>
-    *{
+    * {
         background-color: #333;
         color: aliceblue;
     }
-    textarea,button{
+
+    textarea,
+    button,
+    input {
         width: 75%;
         background-color: #666;
         padding: 10px;
-    } 
+    }
+    #a{
+        position: fixed;
+        top: -100px;
+    }
 </style>
+
 <body>
 
 
     <center>
-    <p id="a"></p>
-    <textarea name="" id="t" cols="30" rows="10">BresoDEV</textarea><br>
-    <br>
-    <br>
-    <button id="iniciar">iniciar</button>
+        <p id="a"></p>
+        <p >HTML Cripto</p>
+        <p ></p>
+        <textarea name="" id="t" cols="30" rows="10" placeholder="HTML Code"></textarea><br>
+        <br>
+        <br>
+        <button id="iniciar">iniciar</button>
+        <br><br>
+        <p id="p">Processos: 0/0</p>
+        <input type="range" max="1" value="0" id="range">
     </center>
 
 </body>
+
 <script>
     document.getElementById('iniciar').addEventListener('click', () => {
-        document.getElementById('iniciar').style.cursor='progress';
+        document.getElementById('iniciar').style.cursor = 'progress';
         document.getElementById('iniciar').textContent = 'Aguarde..';
-        document.getElementById('iniciar').style.backgroundColor='yellow';
-            document.getElementById('iniciar').style.color='black';
-        setTimeout(() => {
-            
-
-            var loren = document.getElementById('t').value;
+        document.getElementById('iniciar').style.backgroundColor = 'yellow';
+        document.getElementById('iniciar').style.color = 'black';
 
 
- 
-        var final = '';
 
-        for (var char = 0; char < loren.length; char++)
-        {
-            for (var i = 0; i < 10000; i++) {
-                    document.getElementById('a').innerHTML = '&#' + i + ';';
-                    if (loren[char] == document.getElementById('a').innerHTML) {
-                        final += '&#' + i + ';';
-                        console.log(loren[char]+' = &#' + i + ';&#32;');
-                        i=999;
-                    }
-                } 
-        }
 
-         
-        document.getElementById('a').innerHTML='';
-        document.getElementById('t').value = '<script>document.write("'+final+'");<\/script>';
-        document.getElementById('iniciar').textContent = 'Iniciar';
-        document.getElementById('iniciar').style.backgroundColor='#666';
-        document.getElementById('iniciar').style.color='aliceblue';
-        document.getElementById('iniciar').style.cursor='default';
-        }, 2000);
+        var loren = document.getElementById('t').value;
+        var range = document.getElementById('range');
+        range.max = loren.length;
+
+        document.getElementById('p').innerHTML = 'Processos: 0/' + loren.length;
+
+
+
+        var char = 0
+        var final = ' ';
+
+        var loop = setInterval(() => {
+
+            for (var i = 0; i < 300; i++) {
+                document.getElementById('a').innerHTML = '&#' + i + ';';
+                if (loren[char] === '<') {
+                    final += '+ \'<\'+';
+                    //console.log(loren[char]+' = &#' + i + ';&#32;');
+                    i = 999;
+                } else if (loren[char] === '>') {
+                    final += '+ \'>\'+';
+                    //console.log(loren[char]+' = &#' + i + ';&#32;');
+                    i = 999;
+                }
+                else if (loren[char] == document.getElementById('a').innerHTML) {
+                    final += '+ String.fromCharCode('+i+') +';
+                    ///console.log(loren[char]+' = &#' + i + ';&#32;');
+                    i = 999;
+                }
+            }
+
+
+            range.value = char;
+            document.getElementById('p').innerHTML = 'Processos: ' + char + '/' + loren.length;
+
+
+            char++;
+
+            if (char > loren.length) {
+                document.getElementById('a').innerHTML = '';
+                final = final.replace(/(\++)/g,'+')
+                document.getElementById('t').value = '<script>document.documentElement.innerHTML=\'\'' + final + '\'\';<\/script>';
+                document.getElementById('iniciar').textContent = 'Iniciar';
+                document.getElementById('iniciar').style.backgroundColor = '#666';
+                document.getElementById('iniciar').style.color = 'aliceblue';
+                document.getElementById('iniciar').style.cursor = 'default';
+                clearInterval(loop);
+            }
+
+        }, 10);
 
     });
 

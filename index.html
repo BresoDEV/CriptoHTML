@@ -14,8 +14,7 @@
     }
 
     textarea,
-    button,
-    input {
+    button{
         width: 75%;
         background-color: #666;
         padding: 10px;
@@ -24,6 +23,7 @@
         position: fixed;
         top: -100px;
     }
+    
 </style>
 
 <body>
@@ -39,7 +39,7 @@
         <button id="iniciar">iniciar</button>
         <br><br>
         <p id="p">Processos: 0/0</p>
-        <input type="range" max="1" value="0" id="range">
+        <progress style="width: 75%;" max="1" value="0" id="range">
     </center>
 
 </body>
@@ -59,6 +59,7 @@
         range.max = loren.length;
 
         document.getElementById('p').innerHTML = 'Processos: 0/' + loren.length;
+        document.getElementById('p').style.color = 'white';
 
 
 
@@ -79,7 +80,10 @@
                     i = 999;
                 }
                 else if (loren[char] == document.getElementById('a').innerHTML) {
-                    final += '+ String.fromCharCode('+i+') +';
+                    var hex =  Math.floor(Math.random()*1000);
+                    var hex2 = Math.floor(Math.random()*1000);
+                    var hex3 = Math.floor(Math.random()*1000);
+                    final += '\n+ /*0x'+((hex+hex2+hex3)*500)+'*/ String.fromCharCode(('+hex2+'+'+hex3+')+('+i+'+'+hex+')-'+hex+'-('+hex2+'+'+hex3+')) +';
                     ///console.log(loren[char]+' = &#' + i + ';&#32;');
                     i = 999;
                 }
@@ -100,7 +104,13 @@
                 document.getElementById('iniciar').style.backgroundColor = '#666';
                 document.getElementById('iniciar').style.color = 'aliceblue';
                 document.getElementById('iniciar').style.cursor = 'default';
+
+                document.getElementById('p').style.color = 'lime';
+                document.getElementById('p').innerHTML='Concluido'
+                range.value = 0;
                 clearInterval(loop);
+
+                document.getElementById('t').focus();
             }
 
         }, 10);

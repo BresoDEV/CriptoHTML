@@ -1,49 +1,162 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CriptoHTML</title>
 </head>
 <style>
     * {
-        background-color: #333;
-        color: aliceblue;
+        -webkit-tap-highlight-color: transparent;
+        /* Remove o flash azul no toque */
+        -webkit-touch-callout: none;
+        /* Remove menu de toque (iOS) */
+        user-select: none;
+        /* Impede seleção de texto acidental (opcional) */
+        -webkit-user-select: none;
+        /* Compatibilidade com WebKit */
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 900px;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+        color: #f1f1f1;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+        color: #b0b0b0;
+    }
+
+    .form-section,
+    .result-section {
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #f1f1f1;
+    }
+
+    .music-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        color: #e0e0e0;
+    }
+
+
+    img {
+        width: 70%;
     }
 
     textarea,
-    button{
-        width: 75%;
-        background-color: #666;
-        padding: 10px;
+    input {
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #444;
+        background-color: #222;
+        color: #f1f1f1;
+        font-size: 1rem;
+        border-radius: 5px;
+        resize: none;
     }
-    #a{
-        position: fixed;
-        top: -100px;
+
+    button {
+        padding: 15px;
+        font-size: 1.1rem;
+        background-color: #6200ea;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
-    
+
+    button:hover {
+        background-color: #3700b3;
+    }
+
+    .art-placeholder,
+    .lyrics-placeholder {
+        background-color: #333;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        color: #b0b0b0;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        button {
+            font-size: 1rem;
+        }
+    }
 </style>
 
 <body>
-
-
-    <center>
-        <p id="a"></p>
-        <p >HTML Cripto</p>
-        <p ></p>
-        <textarea name="" id="t" cols="30" rows="10" placeholder="HTML Code"></textarea><br>
-        <br>
-        <br>
-        <button id="iniciar">iniciar</button>
-        <br><br>
-        <p id="p">Processos: 0/0</p>
-        <progress style="width: 75%;" max="1" value="0" id="range">
-    </center>
-
+    <div class="container">
+        <header class="header">
+            <h1 style="color:cyan">HTML Cripto</h1>
+            <p id="a" style="display:none"></p>
+        </header>
+        <section class="form-section">
+            
+            <div class="music-form">
+                <textarea cols="25" rows="10" id="t" placeholder="HTML Code"></textarea>
+                <button id="iniciar">Iniciar</button>
+                <br>
+                <center>
+                <p id="p">Processos: 0/0</p>
+            </center>
+        <progress style="width: 100%;" max="1" value="0" id="range">
+            </div>
+        </section>
+    </div>
 </body>
-
 <script>
     document.getElementById('iniciar').addEventListener('click', () => {
         document.getElementById('iniciar').style.cursor = 'progress';
@@ -124,3 +237,5 @@
 </script>
 
 </html>
+
+
